@@ -143,7 +143,9 @@ class MainPage(Handler):
             login_text = "Welcome %s" % user.username
             logout_text = "Logout"
             for entry in entries:
-                entry.like = EntryUserLikes.query(EntryUserLikes.user_id == user.key.id(), EntryUserLikes.entry_id == entry.key.id()).get() != None or False
+                entry.like = EntryUserLikes.query(EntryUserLikes.user_id == user.key.id(),
+                                                  EntryUserLikes.entry_id == entry.key.id()).get() != None 
+                                                  or False
                 entries_aux.append(entry)
         else:
             for entry in entries:
@@ -186,23 +188,25 @@ class NewPost(Handler):
             user = ndb.Key(urlsafe=user_url).get()
             login_text = "Welcome %s" % user.username
             logout_text = "Logout"
-        key_url = self.request.get("key")
-        del_att = self.request.get("del")
-        if key_url and not del_att:
-            post = ndb.Key(urlsafe=key_url).get()
-            self.render_form(login=login_text, logout=logout_text, subject=post.subject,
-                             content=post.content, key=key_url)
-        else:
-            if del_att and key_url:
+            key_url = self.request.get("key")
+            del_att = self.request.get("del")
+            if key_url and not del_att:
                 post = ndb.Key(urlsafe=key_url).get()
-                if post.user_id == user.key.id():
-                    post.key.delete()
-                    self.redirect("/blog")
-                else:
-                    self.render("newpost.html",
-                                content_error="You are not allowed to delete this post")
+                self.render_form(login=login_text, logout=logout_text, subject=post.subject,
+                                content=post.content, key=key_url)
             else:
-                self.render_form(login=login_text, logout=logout_text)
+                if del_att and key_url:
+                    post = ndb.Key(urlsafe=key_url).get()
+                    if post.user_id == user.key.id():
+                        post.key.delete()
+                        self.redirect("/blog")
+                    else:
+                        self.render("newpost.html",
+                                    content_error="You are not allowed to delete this post")
+                else:
+                    self.render_form(login=login_text, logout=logout_text)
+        else:
+            self.redirect("/blog/login")
 
     def post(self):
         """ Post method that handle Add or Edit entries """
@@ -225,7 +229,7 @@ class NewPost(Handler):
                         self.redirect("/blog/entry?entry=%s" % key_url)
                     else:
                         self.render("newpost.html",
-                                    content_error="You are not allowed to delete this post")
+                                    content_error="You are not allowed to Edit this post")
             else:
                 subject = self.request.get("subject")
                 content = self.request.get("content")
@@ -295,7 +299,6 @@ class EntryHandler(Handler):
             login_text = "Welcome %s" % user.username
             logout_text = "Logout"
         self.render("entry.html", entry=entry, login=login_text, logout=logout_text)
-
     def post(self):
         """ Post method that handle add, delete or modify comments """
         entry_key_url = self.request.get("entry_key")
