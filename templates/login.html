@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block style %}
+    .general {
+        display: flex;
+        flex-direction: column; 
+        align-content: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container {
+        display: flex;
+        border-radius: 5px;
+        border: 1px solid #FFE0B2;
+        width: 300px;
+        background: #FFF3E0;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+        padding: 8px;
+        align-self: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;  
+    }
+
+    .input-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 100%;
+    }
+
+    input {
+        height: 28px;
+        width: 180px;
+        align-self: center;
+        font-size: 14px;
+        padding: 0 8px;
+    }
+
+    button {
+        height: 32px;
+        width: 82px;
+        margin: 16px 0;
+        background: #FF9800;
+        border: none;
+        align-self: center;
+    }
+
+    .error {
+        color: red;
+        align-self: center;
+        margin: 8px 0;
+        font-size: 12px;
+    }
+
+    .input-element {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 16px 0 8px;
+        align-content: center;
+    }
+
+    label {
+        width: 100px;
+        align-self: center;
+    }
+
+    .register-text {
+        font-size: 12px;
+    }
+{% endblock %}
+
+{% block content %}
+    <div class="general">
+        <div class="container">
+            <form action="/blog/login" method="POST">
+                <h2>Authentication</h2>
+                <hr>
+                <div class="input-element">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" value="{{ username }}" id="username">
+                </div>
+                <div class="input-element">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" value="{{ password }}" id="password">
+                    <span class="error">{{ error }}</span>
+                </div>
+                <button type="submit">Login</button>
+                <span class="register-text">Don't you have an account? Please<a class="login-link" href="/blog/signup">Register</a></span>
+                
+            </form>
+        </div>
+    </div>
+    
+        
+{% endblock %}

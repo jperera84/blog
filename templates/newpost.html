@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    label {
+        margin: 8px 0;
+    }
+
+    input[type=text] {
+        height: 32px;
+        font-size: 18px;
+    }
+
+    textarea {
+        font-size: 18px;
+    }
+
+    button {
+        height: 32px;
+        width: 64px;
+        margin: 16px 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    hr {
+        width: 100%;
+        background-color: #FFCC80;
+        color: #FFCC80;
+        border-color: #FFCC80;
+        border: solid 1px #FFCC80;
+    }
+
+    .error {
+        color: red;
+    }
+       
+{% endblock %}
+
+{% block content %}
+    {% if key %}
+        <h2>Edit Post Form</h2>
+    {% else %}
+         <h2>Add Post Form</h2>
+    {% endif %}
+    <hr>
+   <form method="POST" action="/blog/newpost">
+       <label for="tbSubject">Subject:</label>
+       <input type="text" name="subject" value="{{subject}}" id="tbSubject" placeholder="Enter the subject...">
+       <p class="error">{{subject_error}}</p>
+       <label for="tbContent">Content:</label>
+       <textarea rows="10" cols="100" name="content" id="tbContent" placeholder="Enter the content...">{{ content }}</textarea>
+       <p class="error">{{content_error}}</p>
+       <input type="hidden" name="key" value="{{key}}">
+       <div>
+           <button type="submit">Save</button>
+           <button type="button"><a href="/blog">Cancel</a></button>
+       </div>
+       
+   </form>
+    
+{% endblock %}

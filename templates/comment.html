@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    label {
+        margin: 8px 0;
+    }
+
+    input[type=text] {
+        height: 32px;
+        font-size: 18px;
+    }
+
+    textarea {
+        font-size: 18px;
+    }
+
+    button {
+        height: 32px;
+        width: 64px;
+        margin: 16px 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    hr {
+        width: 100%;
+        background-color: #FFCC80;
+        color: #FFCC80;
+        border-color: #FFCC80;
+        border: solid 1px #FFCC80;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .container {
+        margin: 22px 0;
+    }
+
+    .container-button {
+        margin: 22px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .container-comment {
+        display: flex;
+        flex-direction: column;
+    }
+       
+{% endblock %}
+
+{% block content %}
+
+    <h2>Edit Comment Form</h2>
+    <hr>
+    <div class="container">
+        <form method="POST" action="/blog/entry/comment" class="container-comment">
+            <label for="tbComment">Comment:</label>
+            <textarea rows="5" cols="100" name="content" id="tbComment" placeholder="Enter...">{{ comment }}</textarea>
+            <input type="hidden" name="entry_key" value="{{entry_key}}">
+            <input type="hidden" name="comment_key" value="{{comment_key}}">
+            <p class="error">{{error}}</p>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    
+{% endblock %}

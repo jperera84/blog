@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My Blog</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            * {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -ms-box-sizing: border-box;
+            }
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                font-family: 'Roboto', sans-serif;
+            }
+            header {
+                display: flex;
+                flex-direction: row;
+                min-height: 48px;
+                padding: 0.5em 1.5em;
+                background-color: #ff9800;
+                border-bottom: solid 1px #e65100;
+                box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+                justify-content: space-between;
+                align-content: center;
+                
+            }
+            main {
+                min-height: 100vh;
+                padding: 32px;
+            }
+            footer {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                min-height: 60px;
+                color: #7d97ad;
+            }
+            hr {
+                width: 100%;
+                background-color: #7d97ad;
+                color: #7d97ad;
+            }
+            h1 {
+                line-height: 1.5;
+                word-spacing: 2;
+                font-size: 22px;
+            }
+            .footer__text {
+                align-self: center;
+                font-size: 12px;
+                font-weight: 400;
+                letter-spacing: 1px;
+            }
+            .login-link {
+                align-self: center;
+                padding: 0 8px;
+            }
+            .page-name {
+                text-decoration: none;
+                color: #000000
+            }
+            @media screen and (min-width: 1020px){
+
+                main {
+                    width: 1020px;
+                    margin: auto;
+                    
+                }
+
+            }
+
+            {% block style %}{% endblock %}
+        </style>
+
+    </head>
+    <body>
+        <header>
+            <a class="page-name" href="/blog"><h1>BLOG WEB TECHNOLOGIES</h1></a>
+            <div class="login-link">
+                <a class="login-link" href="/blog/login">{{login}}</a>
+                {% if logout %}
+                    |
+                    <a class="login-link" href="/blog/logout">{{logout}}</a>
+                {% endif %}
+            </div>
+            
+
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            <p class="footer__text">FullStack Web Developer Nanodegree. Udacity</p>
+        </footer>
+    </body>
+</html>

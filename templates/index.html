@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+    .entries-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .entry-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    hr {
+        width: 100%;
+        background-color: #FFCC80;
+        color: #FFCC80;
+        border-color: #FFCC80;
+        border: solid 1px #FFCC80;
+    }
+
+
+    a{
+        align-self: flex-end;
+    }
+
+    .container {
+        margin: 22px 0;
+    }
+
+    .entry-name {
+        text-decoration: none;
+        color: #000000
+    }
+
+    .content {
+        height: 100px;
+        overflow: hidden;
+        border-bottom: solid 3px rgba(255,255,255,0.95)
+    }
+
+    .readmore-link {
+        align-self: flex-end;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .readmore-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    button {
+        background-color: transparent;
+        border: solid 0px;
+        outline: none;
+    }
+
+    h3 {
+        text-decoration: underline;
+    }
+
+    .material-icons.orange600 { color: #FB8C00; }
+    .material-icons.light600 { color: #FFF3E0; }
+{% endblock %}
+
+{% block content %}
+    <div class="entries-header">
+        <h2>Entries</h2>
+        <a href="/blog/newpost">New Post</a>
+    </div>
+    <hr>
+    {% for entry in entries %}
+    <div class="container">
+         <div class="entry-header">
+            <h3>{{entry.subject}}</h3>
+            <div class="entry-header">
+                <p class="readmore-link">{{entry.created.strftime('%Y-%m-%d')}}</p>
+                <form action="/blog" method="POST">
+                    {% if entry.like == True %}
+                        <button type="submit"><i class="material-icons md-24 orange600">star</i></button>
+                    {% else %}
+                        <button type="submit"><i class="material-icons md-24">star</i></button>
+                    {% endif %}
+                    <input type="hidden" name="entry_key" value="{{entry.key.urlsafe()}}">
+                </form>
+            </div>
+        </div>
+
+        <div class="content">
+            {{entry.render()| safe}} 
+        </div>
+        <div class="readmore-container">
+            <a class="readmore-link" href="/blog/entry?entry={{entry.key.urlsafe()}}">Read More</a>
+        </div>
+        
+    </div>
+    {% endfor %}
+{% endblock %}
