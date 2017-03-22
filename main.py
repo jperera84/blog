@@ -440,5 +440,5 @@ APP = webapp2.WSGIApplication([
     ('/blog/signup', SignUp),
     ('/blog/welcome', Welcome),
     ('/blog/login', Login),
-    ('/blog/logout', Logout)], debug=True
-)
+    ('/blog/logout', Logout)], debug=True)
+    
