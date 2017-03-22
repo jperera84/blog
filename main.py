@@ -143,9 +143,7 @@ class MainPage(Handler):
             login_text = "Welcome %s" % user.username
             logout_text = "Logout"
             for entry in entries:
-                entry.like = EntryUserLikes.query(EntryUserLikes.user_id == user.key.id(),
-                                                  EntryUserLikes.entry_id == entry.key.id()).get() != None 
-                                                  or False
+                entry.like = EntryUserLikes.query(EntryUserLikes.user_id == user.key.id(), EntryUserLikes.entry_id == entry.key.id()).get() != None or False
                 entries_aux.append(entry)
         else:
             for entry in entries:
