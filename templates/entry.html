@@ -111,12 +111,12 @@
                 {{comment.content}}
             </div>
             <div class="form-button-comment">
-                <form method="POST" action="/blog/entry">
+                <form method="POST" action="/blog/comment">
                     <button type="submit" class="button-link"><i class="material-icons">delete</i></button>
                     <input type="hidden" name="comment_del_key" value="{{comment.key.urlsafe()}}">
                     <input type="hidden" name="entry_key" value="{{entry.key.urlsafe()}}">
                 </form>
-                <form method="POST" action="/blog/entry">
+                <form method="POST" action="/blog/comment">
                     <button type="submit" class="button-link"><i class="material-icons">edit</i></button>
                     <input type="hidden" name="comment_edit_key" value="{{comment.key.urlsafe()}}">
                     <input type="hidden" name="entry_key" value="{{entry.key.urlsafe()}}">
@@ -125,7 +125,7 @@
         {% endfor %}
     </div>
     <div class="container">
-        <form method="POST" action="/blog/entry" class="container-comment">
+        <form method="POST" action="/blog/comment" class="container-comment">
             <label for="tbComment">Comment:</label>
             <textarea rows="5" cols="100" name="content" id="tbComment" placeholder="Enter...">{{ comment }}</textarea>
             <input type="hidden" name="entry_key" value="{{entry.key.urlsafe()}}">

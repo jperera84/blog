@@ -79,7 +79,7 @@
             <h3>{{entry.subject}}</h3>
             <div class="entry-header">
                 <p class="readmore-link">{{entry.created.strftime('%Y-%m-%d')}}</p>
-                <form action="/blog" method="POST">
+                <form action="/blog/entrylike" method="POST">
                     {% if entry.like == True %}
                         <button type="submit"><i class="material-icons md-24 orange600">star</i></button>
                     {% else %}
